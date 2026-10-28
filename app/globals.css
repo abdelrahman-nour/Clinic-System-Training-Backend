@@ -1,0 +1,137 @@
+@import "tailwindcss";
+
+/* ===== الألوان (غيّرها هنا لما تبيع القالب لدكتور تاني) ===== */
+@theme {
+  --color-primary: #4b1d5e;
+  --color-primary-dark: #2a0f36;
+  --color-primary-soft: #f1e9f5;
+  --color-accent: #f7941d;
+  --color-accent-soft: #fef1e2;
+  --color-bg: #f8f6fa;
+  --color-ink: #1a1220;
+  --color-muted: #6e6475;
+  --color-line: #e7e1ec;
+  --color-danger: #c62828;
+  --color-danger-soft: #fdecec;
+
+  /* ===== الأنيميشن: بتستخدمها بـ animate-fade-up وهكذا ===== */
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  --animate-fade-up: fade-up 0.7s var(--ease-soft) both;
+  --animate-fade-in: fade-in 0.25s ease-out both;
+  --animate-scale-in: scale-in 0.28s var(--ease-soft) both;
+  --animate-slide-in: slide-in 0.32s var(--ease-soft) both;
+  --animate-sheet-up: sheet-up 0.32s var(--ease-soft) both;
+  --animate-pop: pop 0.5s cubic-bezier(0.2, 1.5, 0.4, 1) both;
+  --animate-float: float 7s ease-in-out infinite;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  @keyframes scale-in {
+    from {
+      opacity: 0;
+      transform: scale(0.96);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  /* النافذة الجانبية بتدخل من الشمال (في RTL الشمال هو الآخر) */
+  @keyframes slide-in {
+    from {
+      transform: translateX(-100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes sheet-up {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: none;
+    }
+  }
+  @keyframes pop {
+    0% {
+      opacity: 0;
+      transform: scale(0.4);
+    }
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-14px);
+    }
+  }
+}
+
+@theme inline {
+  --font-sans: var(--font-cairo), system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s var(--ease-soft),
+    transform 0.7s var(--ease-soft);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
